@@ -2,6 +2,7 @@
 //symbolic constant
 #define MAX 20
 #define LIMIT 100
+
 char arr[LIMIT];
 
 void main(){
