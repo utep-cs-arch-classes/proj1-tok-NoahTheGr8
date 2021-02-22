@@ -1,11 +1,11 @@
-main: runer.c tokenizer.c
+main: runner.o tokenizer.o
 	gcc -o run runner.o tokenizer.o
 
 runner.o: runner.c
-	gcc -o runner.c
+	gcc -c runner.c
 
 tokenizer.o: tokenizer.c tokenizer.h
-	gcc -o tokenizer.c
+	gcc -c tokenizer.c
 
 clean:
 	rm -f *.o *~ *#
