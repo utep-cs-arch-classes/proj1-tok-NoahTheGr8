@@ -34,8 +34,19 @@ void main(){
   printf("\n");
   
   //passes the address since word_start parameter is a pointer
+
   
   char *ptr = word_start(usr_input);
-  printf("Actual address of first char: %p\n", &usr_input[1]);
+  printf("*Actual address of first char: %p\n", &usr_input[3]);//change if you are user other inputs
   printf("ptr address of first char: %p\n", ptr);
+  
+  /*
+  char *ptr1 = word_end(usr_input);
+  printf("*Actual address of first space char: %p\n", &usr_input[1]);//change if you are using other inputs
+  printf("ptr address of first space char: %p\n", ptr1);
+  
+  int totWords = count_words(usr_input);
+  printf("Total Words in input> %d\n", totWords);
+  */
+  
 }//main
