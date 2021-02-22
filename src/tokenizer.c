@@ -1,34 +1,70 @@
 #include <stdio.h>
-//symbolic constant
-#define MAX 20
+#include "tokenizer.h"
+
 #define LIMIT 100
 
-char arr[LIMIT];
-
-void main(){
-  /*
-    First milestone - create a simple UI that takes in user input and shoots out 
-    user input in same order
-  */  
-  char input[MAX];
-  printf("* GREETINGS USER *\n");
-  printf("> ");
-  scanf("%s",input);
-  printf("%s\n", input);
+/* Return true (non-zero) if c is a whitespace characer
+   (' ', '\t', or '\n').
+   Zero terminators are not printable (therefore false) */
+int space_char(char c){
   
-  /*
-  //OSCARS WAY
-  printf("> ");
-  int i = 0;
-    for(char input_char ; (input_char = getchar()) != '\n' && i < LIMIT;i++){
-    arr[i] = input_char;
-    //putchar(input_char);
+  int validity;
+  if(c==' ' || c == '\t' || c== '\n'){
+    validity = 1;
+  } else{
+    validity = 0;
   }
-  printf("%s\n",arr);
-  */
+  return validity; 
+}
+
+/* Return true (non-zero) if c is a non-whitespace
+   character (not space, tab, or newline).
+   Zero terminators are not printable (therefore false) */
+int non_space_char(char c) {
   
-  /*
-   TODO-  SPACE_CHAR AND NON_SPACE_CHAR
-   */
- 
-}//main
+  int validity;
+  if(c == ' ' || c == '\t' || c == '\n'){
+    validity = 0;
+  } else{
+    validity = 1;
+  }
+  return validity;
+}
+
+/* Returns a pointer to the first character of the next
+   space-separated word in zero-terminated str.  Return a zero pointer if
+   str does not contain any words.
+   str is assumed to be pointing to a space character */
+// pointer to first nonspace char in first word s
+char *word_start(char *str){
+
+  //check if it doesnt contain any words
+  printf("Pointer address> %p\n",&str);//prints *str address
+  printf("Address that we are storing> %p\n",str);//prints contents in *str
+  printf("Value of the address we are storing> %c\n",*str);//prints pointers stored address values
+  printf("First Adress being stored from the word> %p\n", str);
+  
+  //iterate using the pointer to access next value
+  for( ; *str != '\0'; str++){
+    printf("Current Address during iteration> %p\n",str);
+    //pass each char to nsc()
+    if( non_space_char(*str) == 1 ){
+    	printf("FIRST CHAR ENCOUNTERED> %c\n", *str);
+	return str;
+    }
+  }//for
+  
+  return '\0';
+
+}
+/* Returns a pointer terminator to the first space character or string-terminator
+   following str in a zero terminated string.
+   str is assumed to be pointing to a non-space character*/
+char *word_end(char *str){
+
+
+  return 0;
+}
+
+/* Counts the number of space seperated words in the string argument. */
+int count_words(char *str){return 0;}
