@@ -1,3 +1,13 @@
+/*
+
+Author: R Noah Padilla
+Last Updated: 2/21/21
+
+Goal: complete space_char(), non_space_char(), word_start(),word_end(), and word_count()
+ 
+Resources used: Class Book chapter 5
+*/
+
 #include <stdio.h>
 #include "tokenizer.h"
 
@@ -42,7 +52,7 @@ char *word_start(char *str){
   printf("Pointer address> %p\n",&str);//prints *str address
   printf("Address that we are storing> %p\n",str);//prints contents in *str
   printf("First value of the address we are storing> %c\n",*str);//prints pointers stored address values
-  printf("First values adress from address being stored from the word> %p\n", str);
+  printf("First values' address from address being stored from the word> %p\n", str);
   
   //iterate using the pointer to access next value
   for( ; *str != '\0'; str++){
@@ -58,7 +68,6 @@ char *word_start(char *str){
 
 }//word start
 
-
 /* Returns a pointer terminator to the first space character or string-terminator
    following str in a zero terminated string.
    str is assumed to be pointing to a non-space character*/
@@ -68,7 +77,7 @@ char *word_end(char *str){
   printf("Pointer address being passed> %p\n",&str);//prints *str address
   printf("Address that we are storing in pointer> %p\n",str);//prints contents in *str
   printf("First value of the address we are storing> %c\n",*str);//prints pointers stored first address values
-  printf("First address being stored from the word> %p\n", str);
+  printf("First values' address being stored from the word> %p\n", str);
   
   //iterate using the pointer to access next value
   for( ; *str != '\0'; str++){
@@ -81,7 +90,7 @@ char *word_end(char *str){
   }//for
   
   return '\0';
-}//word end
+}//word_end()
 
 /* Counts the number of space seperated words in the string argument. 
 
@@ -108,4 +117,5 @@ int count_words(char *str){
     words++;
   }
   return words;
-}
+  
+}//count_words()
