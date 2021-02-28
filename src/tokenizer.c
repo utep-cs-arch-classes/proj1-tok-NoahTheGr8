@@ -49,18 +49,19 @@ int non_space_char(char c) {
 char *word_start(char *str){
   printf("------------WORD START------------\n");
   //check if it doesnt contain any words
-  printf("Pointer address> %p\n",&str);//prints *str address
+  printf("Local pointer address in word_start()> %p\n",&str);//prints *str address
   printf("Address that we are storing> %p\n",str);//prints contents in *str
   printf("First value of the address we are storing> %c\n",*str);//prints pointers stored address values
   printf("First values' address from address being stored from the word> %p\n", str);
   
   //iterate using the pointer to access next value
-  for( ; *str != '\0'; str++){
-    printf("-Current Address during iteration> %p\n",str);
+  int i;
+  for( i=0 ; *(str+i) != '\0'; i++){
+    printf("-Current ddress during iteration> %p\n",(str+i));
     //pass each char to nsc()
-    if( non_space_char(*str) == 1 ){
-    	printf("FIRST CHAR ENCOUNTERED> %c\n", *str);
-	return str;
+    if( non_space_char(*(str+i)) == 1 ){
+      printf("FIRST CHAR ENCOUNTERED AT> %p\n", (str+i));
+	return (str+i);
     }
   }//for
   
@@ -74,18 +75,19 @@ char *word_start(char *str){
 char *word_end(char *str){
   printf("------------WORD END------------\n");
   //check if it doesnt contain any words
-  printf("Pointer address being passed> %p\n",&str);//prints *str address
-  printf("Address that we are storing in pointer> %p\n",str);//prints contents in *str
+  printf("Local pointer address in word_end()> %p\n",&str);//prints *str address
+  printf("Address that we are storing in pointer> %p\n",str);//prints contents of address we are storing
   printf("First value of the address we are storing> %c\n",*str);//prints pointers stored first address values
   printf("First values' address being stored from the word> %p\n", str);
   
   //iterate using the pointer to access next value
-  for( ; *str != '\0'; str++){
-    printf("Current Address during iteration> %p\n",str);
+  int i;
+  for(i=0 ; *(str+i) != '\0'; i++){
+    printf("-Current address during iteration> %p\n",(str+i));
     //pass each char to sc()
-    if( space_char(*str) == 1 ){
-    	printf("FIRST SPACE CHAR ENCOUNTERED> %c\n", *str);
-	return str;
+    if( space_char(*(str+i)) == 1 ){
+      printf("FIRST SPACE CHAR ENCOUNTERED AT> %p\n", (str+i));
+	return (str+i);
     }
   }//for
   
@@ -103,11 +105,12 @@ int count_words(char *str){
   //Think of a switch we turn on/off = 1 word
   int words = 0;
   int swtch = 0;
-  for( ; *str != '\0'; str++){
-    if(non_space_char(*str)==1){
+  int i;
+  for( i=0; *(str+i) != '\0'; i++){
+    if(non_space_char(*(str+i))==1){
       swtch = 1;
     }
-    if((swtch==1) && (space_char(*str)==1)){
+    if((swtch==1) && (space_char(*(str+i))==1)){
       words++;
       swtch=0;
     }
@@ -119,3 +122,47 @@ int count_words(char *str){
   return words;
   
 }//count_words()
+
+/* Returns a freshly allocated new zero-terminated string
+   containing <len> chars from <inStr>
+ 
+"Returns len characters from src"
+
+Returns the address of a subset of the word *intStr
+
+*/
+char *copy_str(char *inStr, short len){
+  printf("------------COPY STR------------\n");
+
+  //use malloc?
+  char newWord[len];
+  int i = 0;
+  for(i=0 ; (i<len) && (*(inStr+i) != '\0'); i++){
+     newWord[i] = *(inStr+i);
+  }//for
+
+return newWord;
+
+}//copy_str()
+
+/* Returns a freshly allocated zero-terminated vector of freshly allocated
+   space-separated tokens from zero-terminated str.
+
+   For example, tokenize("hello world string") would result in:
+     tokens[0] = "hello"
+     tokens[1] = "world"
+     tokens[2] = "string"
+     tokens[3] = 0
+*/
+char **tokenize(char* str){
+  //not part of 3rd milestone
+}//tokenizer
+
+/* Prints all tokens. */
+void print_tokens(char **tokens){
+  
+
+}//print tokens
+
+/* Frees all tokens and the vector containing them. */
+void free_tokens(char **tokens);
