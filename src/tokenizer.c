@@ -1,7 +1,7 @@
 /*
 
 Author: R Noah Padilla
-Last Updated: 2/21/21
+Last Updated: 2/27/21
 
 Goal: complete space_char(), non_space_char(), word_start(),word_end(), and word_count()
  
@@ -9,6 +9,7 @@ Resources used: Class Book chapter 5
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "tokenizer.h"
 
 #define LIMIT 100
@@ -130,20 +131,26 @@ int count_words(char *str){
 
 Returns the address of a subset of the word *intStr
 
+NOTE: DOES NOT CONSIDER IF LEN IS GREATER THAN THE SIZE OF 'inStr' - assumes perfect scenario everytime
 */
 char *copy_str(char *inStr, short len){
   printf("------------COPY STR------------\n");
-
-  //use malloc?
-  char newWord[len];
-  int i = 0;
-  for(i=0 ; (i<len) && (*(inStr+i) != '\0'); i++){
-     newWord[i] = *(inStr+i);
-  }//for
-
-return newWord;
-
+  printf("Substring size: %d\n",len);
+  //Allocate fresh memory | (len+1) indicates the substring plus the '\0' at the end
+  char *clone = malloc(sizeof(char) * (len+1));
+  int i; //keeps track of len
+  for(i=0; i<len; i++){
+    *(clone+i) = *(inStr+i); 
+  }
+  *(clone+(len)) = '\0';//set the last value to the zero terminator
+  return clone;
 }//copy_str()
+
+/* Prints all tokens. */
+void print_tokens(char **tokens){}//print_tokens()
+
+/* Frees all tokens and the vector containing them. */
+void free_tokens(char **tokens){}//free_tokens()
 
 /* Returns a freshly allocated zero-terminated vector of freshly allocated
    space-separated tokens from zero-terminated str.
@@ -154,15 +161,6 @@ return newWord;
      tokens[2] = "string"
      tokens[3] = 0
 */
-char **tokenize(char* str){
-  //not part of 3rd milestone
-}//tokenizer
+char **tokenize(char* str){}
 
-/* Prints all tokens. */
-void print_tokens(char **tokens){
-  
 
-}//print tokens
-
-/* Frees all tokens and the vector containing them. */
-void free_tokens(char **tokens);
