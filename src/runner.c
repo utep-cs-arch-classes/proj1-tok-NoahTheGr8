@@ -33,21 +33,26 @@ void main(){
   printf(usr_input);
   printf("\n");
   
-  //passes the address since word_start parameter is a pointer
-
-   
-  char *ptr = word_start(usr_input);
-  printf("*Actual address of first char: %p\n", &usr_input[3]);//change if you are user other inputs
-  printf("ptr address of first char: %p\n", ptr);
-  
+  //------------------- WORD START -------------------
   /*
-  char *ptr1 = word_end(usr_input);
-  printf("*Actual address of first space char: %p\n", &usr_input[1]);//change if you are using other inputs
-  printf("ptr address of first space char: %p\n", ptr1);
+  //Assume you start on a space char
+  char *ptr = word_start(usr_input);
+  printf("*Actual address of first char: %p\n", &usr_input[3]);//FOR TESTING - change if you are user other inputs
+  printf("ptr address of first char: %p\n", ptr);
   */
-
+  //------------------- WORD END -------------------
+  //Assume you start on a non_space char
+  char *ptr1 = word_end(usr_input);
+  printf("*Actual address of first space char: %p\n", &usr_input[3]);//change if you are using other inputs
+  printf("ptr address of first space char: %p\n", ptr1);
+  
+  //------------------- COUNT WORDS -------------------
   int totWords = count_words(usr_input);
   printf("Total Words in input> %d\n", totWords);
-  
+
+  //------------------- COPY STR -------------------
+  char *clone = copy_str(usr_input, 2 );
+  printf("USER INPUT addess: %p\n", &usr_input);
+  printf("CLONE address: %p\n", clone);
   
 }//main
