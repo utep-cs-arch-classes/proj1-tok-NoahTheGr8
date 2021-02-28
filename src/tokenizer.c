@@ -12,8 +12,6 @@ Resources used: Class Book chapter 5
 #include <stdlib.h>
 #include "tokenizer.h"
 
-#define LIMIT 100
-
 /* Return true (non-zero) if c is a whitespace characer
    (' ', '\t', or '\n').
    Zero terminators are not printable (therefore false) */
@@ -48,7 +46,7 @@ int non_space_char(char c) {
    str is assumed to be pointing to a space character */
 // pointer to first nonspace char in first word s
 char *word_start(char *str){
-  printf("------------WORD START------------\n");
+  
   //check if it doesnt contain any words
   printf("Local pointer address in word_start()> %p\n",&str);//prints *str address
   printf("Address that we are storing> %p\n",str);//prints contents in *str
@@ -74,7 +72,7 @@ char *word_start(char *str){
    following str in a zero terminated string.
    str is assumed to be pointing to a non-space character*/
 char *word_end(char *str){
-  printf("------------WORD END------------\n");
+  
   //check if it doesnt contain any words
   printf("Local pointer address in word_end()> %p\n",&str);//prints *str address
   printf("Address that we are storing in pointer> %p\n",str);//prints contents of address we are storing
@@ -102,7 +100,7 @@ everytime we see the start of a word, we lift the switch and when the word ends 
 
 */
 int count_words(char *str){
-  printf("------------COUNT WORDS------------\n");
+
   //Think of a switch we turn on/off = 1 word
   int words = 0;
   int swtch = 0;
@@ -134,7 +132,7 @@ Returns the address of a subset of the word *intStr
 NOTE: DOES NOT CONSIDER IF LEN IS GREATER THAN THE SIZE OF 'inStr' - assumes perfect scenario everytime
 */
 char *copy_str(char *inStr, short len){
-  printf("------------COPY STR------------\n");
+  
   printf("Substring size: %d\n",len);
   //Allocate fresh memory | (len+1) indicates the substring plus the '\0' at the end
   char *clone = malloc(sizeof(char) * (len+1));
@@ -146,12 +144,6 @@ char *copy_str(char *inStr, short len){
   return clone;
 }//copy_str()
 
-/* Prints all tokens. */
-void print_tokens(char **tokens){}//print_tokens()
-
-/* Frees all tokens and the vector containing them. */
-void free_tokens(char **tokens){}//free_tokens()
-
 /* Returns a freshly allocated zero-terminated vector of freshly allocated
    space-separated tokens from zero-terminated str.
 
@@ -161,6 +153,70 @@ void free_tokens(char **tokens){}//free_tokens()
      tokens[2] = "string"
      tokens[3] = 0
 */
-char **tokenize(char* str){}
+char **tokenize(char* str){
+  
+  //Get number of words first
+  int words = count_words(str);
 
+  //Allocate memory for a pointer pointing to its pointers | the outter most '+1' is the zero terminator for the list of tokens instead of zeroterminator for word
+  char **tokens = malloc( ((sizeof(char*) * (words + 1)) + 1);
+
+  int i = 0;//index to navigate through memory
+  int copied_words = 0; //keeps track if we copied all the words
+  char *ptr = str; //pointer to navigate through values from passed 'str'
+  
+  while(copied_words != words){
+
+    //if we start at a space | if not starting at space, ptr is already in right place
+    if( space_char(*ptr) == 1  ){
+      printf("AT A SPACE\n");
+      //get the word starting from pt
+      ptr = word_start(str);
+    }
+    char *ending_char = word_end(str);
+
+    printf("start letter: %c\n", *ptr);
+    printf("end letter: %c\n", *ending_char);
+    
+    while(1){
+      //if we are at the end of the word or input
+      printf("1\n");
+      if( (*ptr == *ending_char) || (*ptr == '\0') ){
+	printf("in if");
+	//**(tokens + i) = '\0';
+	copied_words++;
+	printf("**BREAKING OUT**\n", copied_words );
+	break;
+      }
+      else{
+	printf("in else");
+	**(tokens + i) = *ptr;
+      }
+      printf("2\n");
+      ptr++;
+      i++;
+    }//inner while
+    printf("3\n");
+  }//outter while
+
+  //Set the last value in the pointer of pointers to the zero terminator
+  **(tokens+words+1) = '\0';
+
+  printf("Done tokenizing\n");
+
+
+}//**tokenize()
+
+/* Prints all tokens. */
+void print_tokens(char **tokens){
+
+  int i;
+  for (i = 0; *(tokens+i) != '\0'; i++){
+    printf("Token %d", i , ": %s\n", *(tokens+i));
+  }//for
+  
+}//print_tokens()
+
+/* Frees all tokens and the vector containing them. */
+void free_tokens(char **tokens){}//free_tokens()
 
