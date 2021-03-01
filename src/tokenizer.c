@@ -1,11 +1,10 @@
 /*
-
 Author: R Noah Padilla
-Last Updated: 2/27/21
+Last Updated: 2/28/21
 
-Goal: complete space_char(), non_space_char(), word_start(),word_end(), and word_count()
+Goal: complete space_char(), non_space_char(), word_start(),word_end(), and word_count(), copy_str(), tokenize(), free_tokens(), print_tokens()
  
-Resources used: Class Book chapter 5
+Resources used: Class Book chapter 5 and lab recordings
 */
 
 #include <stdio.h>
@@ -46,20 +45,21 @@ int non_space_char(char c) {
    str is assumed to be pointing to a space character */
 // pointer to first nonspace char in first word s
 char *word_start(char *str){
-  
+  /* USED FOR DEBUGGING
   //check if it doesnt contain any words
   printf("Local pointer address in word_start()> %p\n",&str);//prints *str address
   printf("Address that we are storing> %p\n",str);//prints contents in *str
   printf("First value of the address we are storing> %c\n",*str);//prints pointers stored address values
   printf("First values' address from address being stored from the word> %p\n", str);
-  
+  */
+
   //iterate using the pointer to access next value
   int i;
   for( i=0 ; *(str+i) != '\0'; i++){
-    printf("-Current ddress during iteration> %p\n",(str+i));
+    //printf("-Current ddress during iteration> %p\n",(str+i));//used for debugging
     //pass each char to nsc()
     if( non_space_char(*(str+i)) == 1 ){
-      printf("FIRST CHAR ENCOUNTERED AT> %p\n", (str+i));
+        //printf("FIRST CHAR ENCOUNTERED AT> %p\n", (str+i));//used for debugging
 	return (str+i);
     }
   }//for
@@ -72,25 +72,28 @@ char *word_start(char *str){
    following str in a zero terminated string.
    str is assumed to be pointing to a non-space character*/
 char *word_end(char *str){
-  
+
+  /* USED FOR DEBUGGING
   //check if it doesnt contain any words
   printf("Local pointer address in word_end()> %p\n",&str);//prints *str address
   printf("Address that we are storing in pointer> %p\n",str);//prints contents of address we are storing
   printf("First value of the address we are storing> %c\n",*str);//prints pointers stored first address values
   printf("First values' address being stored from the word> %p\n", str);
+  */
   
   //iterate using the pointer to access next value
-  int i;
-  for(i=0 ; *(str+i) != '\0'; i++){
-    printf("-Current address during iteration> %p\n",(str+i));
+  int i = 0;
+
+  while(1){
+    //printf("-Current address during iteration> %p\n",(str+i));//used for debugging
     //pass each char to sc()
-    if( space_char(*(str+i)) == 1 ){
-      printf("FIRST SPACE CHAR ENCOUNTERED AT> %p\n", (str+i));
+    if( (space_char(*(str+i)) == 1) || (*(str+i) == '\0') ){
+        //printf("FIRST SPACE CHAR ENCOUNTERED AT> %p\n", (str+i)); //used for debugging
 	return (str+i);
     }
-  }//for
+    i++;
+  }//while
   
-  return '\0';
 }//word_end()
 
 /* Counts the number of space seperated words in the string argument. 
@@ -133,9 +136,9 @@ NOTE: DOES NOT CONSIDER IF LEN IS GREATER THAN THE SIZE OF 'inStr' - assumes per
 */
 char *copy_str(char *inStr, short len){
   
-  printf("Substring size: %d\n",len);
+  //printf("Substring size: %d\n",len);//used for debugging
   //Allocate fresh memory | (len+1) indicates the substring plus the '\0' at the end
-  char *clone = malloc(sizeof(char) * (len+1));
+  char *clone = (char*)malloc(sizeof(char) * (len+1));
   int i; //keeps track of len
   for(i=0; i<len; i++){
     *(clone+i) = *(inStr+i); 
@@ -154,69 +157,73 @@ char *copy_str(char *inStr, short len){
      tokens[3] = 0
 */
 char **tokenize(char* str){
-  
+  printf("\n >> Tokenizing... <<\n");
   //Get number of words first
-  int words = count_words(str);
+  int num_words = count_words(str);
 
-  //Allocate memory for a pointer pointing to its pointers | the outter most '+1' is the zero terminator for the list of tokens instead of zeroterminator for word
-  char **tokens = malloc( ((sizeof(char*) * (words + 1)) + 1);
+  //Allocate memory for each word + zero terminator
+  char **tokens;
+  tokens = (char**)malloc(sizeof(char*) * (num_words+1) + 1);
+    /* 
+       -- Algorithm (influenced from lab 2/24/21)
+               1) Get the word start and word end of str
+	       2) Calcualate the distance in memory between start and end
+	       3) Send word[start:end] to copy_str
+	       4) Set step 3 to the array location of tokens
+	       5) Repeat steps 1-4 with next word
+     */
+  int copied_words = 0;
+  int ind = 0;//goes through to set the values of tokens array
+  char *p_1;//points to address of the first letter of the next word from 'str'
+  p_1 = word_start(str);
+  char *p_2;//points to address of the first character after the last letter of p_1 from 'str'
+  while( copied_words != num_words){
 
-  int i = 0;//index to navigate through memory
-  int copied_words = 0; //keeps track if we copied all the words
-  char *ptr = str; //pointer to navigate through values from passed 'str'
-  
-  while(copied_words != words){
-
-    //if we start at a space | if not starting at space, ptr is already in right place
-    if( space_char(*ptr) == 1  ){
-      printf("AT A SPACE\n");
-      //get the word starting from pt
-      ptr = word_start(str);
+    //considers empty string and 1 input with 1 word and no spaces
+    if((*p_1 == '\0')){
+      break;
     }
-    char *ending_char = word_end(str);
-
-    printf("start letter: %c\n", *ptr);
-    printf("end letter: %c\n", *ending_char);
     
-    while(1){
-      //if we are at the end of the word or input
-      printf("1\n");
-      if( (*ptr == *ending_char) || (*ptr == '\0') ){
-	printf("in if");
-	//**(tokens + i) = '\0';
-	copied_words++;
-	printf("**BREAKING OUT**\n", copied_words );
-	break;
-      }
-      else{
-	printf("in else");
-	**(tokens + i) = *ptr;
-      }
-      printf("2\n");
-      ptr++;
-      i++;
-    }//inner while
-    printf("3\n");
-  }//outter while
+    //get end of word
+    p_2 = word_end(p_1);
+  
+    int dist = (int)(p_2-p_1);//calc len of word
+    //printf("Distance between start and end: %d\n", dist);//used for debugging
+    tokens[ind] = copy_str(p_1,dist);
+    copied_words++;
+    
+    ind++;
+    p_1 = word_start(p_2);//set the starting pointer to the last a value
+  }//while
 
-  //Set the last value in the pointer of pointers to the zero terminator
-  **(tokens+words+1) = '\0';
+  tokens[ind] = '\0';//set the last value to z.t.
+  
+  printf(" >>...Done tokenizing<<\n");
+  return tokens;
 
-  printf("Done tokenizing\n");
-
-
-}//**tokenize()
+}//--------------------------------**tokenize()
 
 /* Prints all tokens. */
 void print_tokens(char **tokens){
 
+  printf("\n ** PRINTING TOKENS... **\n");
   int i;
-  for (i = 0; *(tokens+i) != '\0'; i++){
-    printf("Token %d", i , ": %s\n", *(tokens+i));
+  for (i = 0; *(tokens+i) != 0 ; i++){
+    printf("Token %d",i);
+    printf(": %s\n",*(tokens+i));
   }//for
-  
+  printf(" ** ...DONE PRINTING **\n");
 }//print_tokens()
-
 /* Frees all tokens and the vector containing them. */
-void free_tokens(char **tokens){}//free_tokens()
-
+void free_tokens(char **tokens){
+  printf("\n -- FREEING TOKENS...--\n");
+  int i;
+  for (i = 0; *(tokens+i) != 0 ; i++){
+    free(*(tokens+i));//frees each token
+    //printf("Token %d",i);//used for debugging
+    //printf(": %s\n",*(tokens+i));//used for debugging
+  }//for
+  free(tokens);//frees the vector containing them
+  printf(" -- ...DONE FREEING --\n");
+  
+}//free_tokens()
