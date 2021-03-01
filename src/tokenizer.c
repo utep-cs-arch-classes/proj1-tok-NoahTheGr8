@@ -11,6 +11,7 @@ Resources used: Class Book chapter 5 and lab recordings
 #include <stdlib.h>
 #include "tokenizer.h"
 
+
 /* Return true (non-zero) if c is a whitespace characer
    (' ', '\t', or '\n').
    Zero terminators are not printable (therefore false) */
@@ -24,6 +25,7 @@ int space_char(char c){
   }
   return validity; 
 }
+
 
 /* Return true (non-zero) if c is a non-whitespace
    character (not space, tab, or newline).
@@ -39,12 +41,14 @@ int non_space_char(char c) {
   return validity;
 }
 
+
 /* Returns a pointer to the first character of the next
    space-separated word in zero-terminated str.  Return a zero pointer if
    str does not contain any words.
    str is assumed to be pointing to a space character */
 // pointer to first nonspace char in first word s
 char *word_start(char *str){
+
   /* USED FOR DEBUGGING
   //check if it doesnt contain any words
   printf("Local pointer address in word_start()> %p\n",&str);//prints *str address
@@ -96,7 +100,9 @@ char *word_end(char *str){
   
 }//word_end()
 
-/* Counts the number of space seperated words in the string argument. 
+
+/* 
+Counts the number of space seperated words in the string argument. 
 
 I think of this function as a switch where 
 everytime we see the start of a word, we lift the switch and when the word ends we drop the switch and increment the number of words we have
@@ -125,6 +131,7 @@ int count_words(char *str){
   
 }//count_words()
 
+
 /* Returns a freshly allocated new zero-terminated string
    containing <len> chars from <inStr>
  
@@ -147,6 +154,7 @@ char *copy_str(char *inStr, short len){
   return clone;
 }//copy_str()
 
+
 /* Returns a freshly allocated zero-terminated vector of freshly allocated
    space-separated tokens from zero-terminated str.
 
@@ -157,7 +165,9 @@ char *copy_str(char *inStr, short len){
      tokens[3] = 0
 */
 char **tokenize(char* str){
+  
   printf("\n >> Tokenizing... <<\n");
+
   //Get number of words first
   int num_words = count_words(str);
 
@@ -172,11 +182,13 @@ char **tokenize(char* str){
 	       4) Set step 3 to the array location of tokens
 	       5) Repeat steps 1-4 with next word
      */
+  
   int copied_words = 0;
   int ind = 0;//goes through to set the values of tokens array
   char *p_1;//points to address of the first letter of the next word from 'str'
   p_1 = word_start(str);
   char *p_2;//points to address of the first character after the last letter of p_1 from 'str'
+
   while( copied_words != num_words){
 
     //considers empty string and 1 input with 1 word and no spaces
@@ -201,7 +213,8 @@ char **tokenize(char* str){
   printf(" >>...Done tokenizing<<\n");
   return tokens;
 
-}//--------------------------------**tokenize()
+}//**tokenize()
+
 
 /* Prints all tokens. */
 void print_tokens(char **tokens){
@@ -214,6 +227,8 @@ void print_tokens(char **tokens){
   }//for
   printf(" ** ...DONE PRINTING **\n");
 }//print_tokens()
+
+
 /* Frees all tokens and the vector containing them. */
 void free_tokens(char **tokens){
   printf("\n -- FREEING TOKENS...--\n");
