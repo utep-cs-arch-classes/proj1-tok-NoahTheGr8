@@ -30,8 +30,7 @@ void main(){
     printf(usr_input);
     printf("\n");
     
-    printf("------------TOKENIZE------------\n");
-  
+    printf("------------TOKENIZE------------\n"); 
     if(count_words(usr_input) != 0 ){
       char **tokens = tokenize(usr_input);
       print_tokens(tokens);
@@ -53,8 +52,7 @@ void main(){
       keep_going = 0;
       //will exit outter most while since user does not want to continue
     }
-      
+    
   }//END OUTTER WHILE
 
-
-  }//main
+}//main
