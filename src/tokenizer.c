@@ -173,7 +173,7 @@ char **tokenize(char* str){
 
   //Allocate memory for each word + zero terminator
   char **tokens;
-  tokens = (char**)malloc(sizeof(char*) * (num_words+1) + 1);
+  tokens = (char**)malloc(sizeof(char*) * (num_words+1));
     /* 
        -- Algorithm (influenced from lab 2/24/21)
                1) Get the word start and word end of str
@@ -233,10 +233,8 @@ void print_tokens(char **tokens){
 void free_tokens(char **tokens){
   printf("\n -- FREEING TOKENS...--\n");
   int i;
-  for (i = 0; *(tokens+i) != 0 ; i++){
-    free(*(tokens+i));//frees each token
-    //printf("Token %d",i);//used for debugging
-    //printf(": %s\n",*(tokens+i));//used for debugging
+  for(i=0; *(tokens+i) != 0 ; i++){
+    free(tokens[i]);//frees each token
   }//for
   free(tokens);//frees the vector containing them
   printf(" -- ...DONE FREEING --\n");
