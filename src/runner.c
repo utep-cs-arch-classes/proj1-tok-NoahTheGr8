@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "tokenizer.h"
 #include "tokenizer.c"
+#include "history.h"
+#include "history.c"
 
 #define LIMIT 100
 /*
@@ -13,8 +15,9 @@ void main(){
   //Welcome User
   printf("GREETINGS USER\n");
   
-  //<CREATE LINKED LIST HERE>
-  //List *list = init_history();
+  //Create a linked list that stores the history of inputs
+  List *inp_hist = init_history();
+  
   char keep_going = 1;//updates if user wants to continue or end program
   while(keep_going){
 
@@ -30,7 +33,7 @@ void main(){
       ind++;  
     }//while
     //Add input to linked list here
-
+    add_history(inp_hist, usr_input);
     printf("Input: ");
     printf(usr_input);
     printf("\n");
@@ -66,7 +69,7 @@ void main(){
     }//else
     //Show previous inputs
     if(in == 'h'){
-      // print_history(list);
+      print_history(inp_hist);
     }
     
   }//END OUTTER WHILE
