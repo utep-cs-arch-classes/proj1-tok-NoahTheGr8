@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include "history.h"
 
-
 /*
+
+TODO: Fix add_history()
 
 --------- TOP OF HEADER FILE --------- 
 
@@ -31,18 +32,29 @@ void add_history(List *list, char *str){
 
   //create a new node
   Item *item = (Item*)malloc(sizeof(Item) * 1);
+  item->str = str;
   
   //if there is no head then set it to the head
   if (list->root == NULL){
-    printf("<<<< CREATED A NEW HEAD >>>\n");
     list->root = item;
-    list->root->next = NULL;
-    list->root->id = 0;
-  }
-    
-  //else append node to the end linked list
- 
-}
+  } 
+  else{
+    //-----------------TODO------------
+    printf("<<<< Adding a new node to the linked list>>>> \n");
+    Item *curr = list->root;
+    //traverse to the last element of the list
+    int id = 0;
+    while(curr->next != NULL){
+      curr = curr->next;
+      id++;
+    }//while
+
+    //set the values of the new node
+    curr->next = item;
+    curr->next->id = id+1;
+  }//else
+  
+}//add_history()
 
 /* Retrieve the string stored in the node where Item->id == id.
    List* list - the linked list
@@ -55,14 +67,14 @@ char *get_history(List *list, int id){
 /* Print the entire contents of the list. */
 void print_history(List *list){
 
-  //curr navigates through the linked list
-  Item *curr = list->root;
+  Item *curr = list->root;//get the head of the list
 
+  //traverse all elements until curr = NULL
   while(curr != NULL){
     printf("Input %d: ", curr->id);
-    printf("%s\n",curr->str);
+    printf("%s\n", curr->str);
     curr = curr->next;
-  }
+  }//while
   
 }//print_history()
 
