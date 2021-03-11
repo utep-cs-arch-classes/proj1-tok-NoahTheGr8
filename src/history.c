@@ -39,8 +39,6 @@ void add_history(List *list, char *str){
     list->root = item;
   } 
   else{
-    //-----------------TODO------------
-    printf("<<<< Adding a new node to the linked list>>>> \n");
     Item *curr = list->root;
     //traverse to the last element of the list
     int id = 0;
@@ -51,7 +49,7 @@ void add_history(List *list, char *str){
 
     //set the values of the new node
     curr->next = item;
-    curr->next->id = id+1;
+    item->id = id+1;
   }//else
   
 }//add_history()
@@ -61,8 +59,21 @@ void add_history(List *list, char *str){
    int id - the id of the Item to find */
 char *get_history(List *list, int id){
 
+  Item *curr = list->root;
+  //traverse entire list to find desired link
+  while( curr != NULL ){
+    if( curr->id == id ){
+      printf(" ** RETRIEVED LINK **\n");
+      return curr->str;
+    }
+    curr = curr->next;
+  }//while
 
-}
+  //if the id was not found in the list
+  return NULL;
+  
+}//get_history()
+
 
 /* Print the entire contents of the list. */
 void print_history(List *list){
