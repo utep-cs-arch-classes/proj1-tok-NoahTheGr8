@@ -11,7 +11,6 @@ Resources used: Class Book chapter 5 and lab recordings
 #include <stdlib.h>
 #include "tokenizer.h"
 
-
 /* Return true (non-zero) if c is a whitespace characer
    (' ', '\t', or '\n').
    Zero terminators are not printable (therefore false) */
