@@ -19,7 +19,10 @@ void main(){
   
   char keep_going = 1;//updates if user wants to continue or end program
   while(keep_going){
-  
+
+    //CHANGED ARRAY STORING STRING AND pointer to string
+    //char *usr_input = (char*)malloc(sizeof(char)*1);
+    
     //Get Input
     char c;
     int ind = 0; //ind is index for storing chars in usr_input string
@@ -31,8 +34,11 @@ void main(){
       ind++;  
     }//while
 
+    //create a copy that will go into the linked list
+    char *input = copy_str(usr_input, sizeof(usr_input) / sizeof(usr_input[0]));
+      
     //Add input to linked list here
-    add_history(inp_hist, usr_input);
+    add_history(inp_hist, input);
     
     //------------TOKENIZE------------
     if(count_words(usr_input) != 0 ){
