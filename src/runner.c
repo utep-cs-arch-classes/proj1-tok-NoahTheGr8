@@ -28,7 +28,7 @@ void main(){
     int ind = 0; //ind is index for storing chars in usr_input string
     char usr_input[LIMIT]; //Stores an input of size LIMIT
     printf("---------------------\n");
-    printf("IN > ");
+    printf("String to tokenize > ");
     while( (c=getchar()) != '\n' ){
       usr_input[ind] = c;
       ind++;  
@@ -70,7 +70,13 @@ void main(){
     for(i = 0; i < sizeof(usr_input)/sizeof(usr_input[0]); i++){
       usr_input[i] = 0;
     }
-    
   }//END OUTTER WHILE
 
+  //char *des_link = (char *)malloc(sizeof(char));
+  //the first link in the LL has id = 0
+  //[a] [b] [c] | -1=NULL>>, 0=a>>,1=b>>,2=c>>,3=NULL >>
+  int id = 3;
+  char *des_link = get_history(inp_hist, id);
+  printf("Link %d string> %s\n", id ,des_link);
+  
 }//main
