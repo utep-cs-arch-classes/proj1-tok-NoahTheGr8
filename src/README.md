@@ -61,6 +61,8 @@ RUN USING COMMANDS (in order seen):
 
 RUN USING Makefile (in order seen):
 - ```make clean```
+- ```make```
+- ```./runner```
 
 ### Interacting with the UI
 The UI is straight forward and there is a guide shown at the top once the
