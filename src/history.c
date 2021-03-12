@@ -50,7 +50,6 @@ char *get_history(List *list, int id){
   //traverse entire list to find desired link
   while( curr != NULL ){
     if( curr->id == id ){
-      printf(" ** RETRIEVED LINK **\n");
       return curr->str;
     }
     curr = curr->next;
@@ -65,10 +64,15 @@ char *get_history(List *list, int id){
 /* Print the entire contents of the list. */
 void print_history(List *list){
 
+  //if the list is empty tell user there is N/A
+  if(list->root == NULL){
+    printf("\t *NOTHING IN HISTROY YET*\n");
+  }
+  
   Item *curr = list->root;
 
   while(curr != NULL){
-    printf("Input %d: %s\n", curr->id, curr->str);
+    printf("\tInput %d: %s\n", curr->id, curr->str);
     curr = curr->next;
   }//while
   
@@ -93,5 +97,6 @@ void free_history(List *list){
   
   //free the list
   free(list);
+  printf("\t>> FREE'D HISTORY <<\n");
   
 }//free_history()
