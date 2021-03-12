@@ -20,6 +20,7 @@ This entire project was done in Emacs in openSUSE Linux in VMware Workstation
 on a Windows 10 PC. 
 
 ### State Diagram of Program
+Plug this mermaid graph markdown into the stack edit markdown editor to view properly.
 
 ```mermaid
 graph LR
@@ -70,12 +71,11 @@ program is ran. A demo is shown below -
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 GUIDE TO VALID INPUTS:
 
--   '!n'        - prints n'th input you entered into this program (1'st input
-    entered is considered 0'th for this program)
-    -   '!'     - prints all inputs you entered into this program
-    -   <string> - tokenizes <string>  and prints each token('<' , '>' not
+    -   '!n'        - prints n'th input you entered into this program (1'st input entered is considered 0'th for this program)
+    -   '!'         - prints all inputs you entered into this program
+    -   <string>    - tokenizes <string>  and prints each token('<' , '>' not
     required)
-    -   'q'	- Frees all memory stored in history and exits program
+    -   'q'	    - Frees all memory stored in history and exits program
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -115,10 +115,9 @@ IN> q
 ```
 
 ### Bugs
-Although there may be many bugs, I tested and programmed the best I could to
-handle all inputs. After
-testing for a while I could only find the bug listed below. All invalid inputs
-should've asked for input again if the input was invalid however I could not
-figure out this bug by the deadline.
+There may be many bugs undiscovered but I tested and programmed the best I could to
+handle all inputs. After testing for a while I could only find the bug listed
+below. All invalid inputs should've asked for input again if the input was
+invalid however I could not figure out this bug by the deadline.
 * Accessing a history element by incorrectly putting in the id correcty. For
 example - '!1----' 
