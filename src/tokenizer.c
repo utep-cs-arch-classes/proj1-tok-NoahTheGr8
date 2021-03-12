@@ -200,6 +200,6 @@ void free_tokens(char **tokens){
     free(tokens[i]);//frees each token
   }//for
   free(tokens);//frees the vector containing them
-  printf(" >> ...FREE'D TOKENS <<\n");
+  printf("\t>> FREE'D TOKENS <<\n");
   
 }//free_tokens()
