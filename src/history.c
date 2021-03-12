@@ -2,27 +2,12 @@
 #include <stdlib.h>
 #include "history.h"
 
-/*
-
-TODO: Fix add_history()
-
---------- TOP OF HEADER FILE --------- 
-
-typedef struct s_Item {
-  int id;
-  char *str;
-  struct s_Item *next;
-} Item;
-
-typedef struct s_List {
-  struct s_Item *root;
-} List;
- */
 
 /* Initialize the linked list to keep the history.*/
 List* init_history(){
   return (List*)malloc(sizeof(List) * 1);
 }
+
 
 /* Add a history item to the end of the list.
    List* list - the linked list
@@ -88,10 +73,24 @@ void print_history(List *list){
   
 }//print_history()
 
+
 /* Free the history list and the strings it references. */
 void free_history(List *list){
 
-  //use get_history();
-  printf("size of linkedlist %d", sizeof(list)/sizeof(list->root));
+  //Free all the links in the linked list
+  Item *curr = list->root;
+  Item *prev;
 
-}
+  //Analogy to process below: destroying a bridge behind you so that you can never go back 
+  while(curr != NULL){
+    prev = curr;
+    curr = curr->next;
+
+    free(prev->str);//free the string
+    free(prev);//free the link
+  }
+  
+  //Free the list
+  free(list);
+  
+}//free_history()
