@@ -19,13 +19,13 @@ void add_history(List *list, char *str){
   Item *item = (Item*)malloc(sizeof(Item) * 1);
   item->str = str;
   
-  //if there is no head then set it to the head
+  //if there is no root then set new item to the head
   if (list->root == NULL){
     list->root = item;
   } 
   else{
     Item *curr = list->root;
-    //traverse to the last element of the list
+    
     int id = 0;
     while(curr->next != NULL){
       curr = curr->next;
@@ -39,12 +39,14 @@ void add_history(List *list, char *str){
   
 }//add_history()
 
+
 /* Retrieve the string stored in the node where Item->id == id.
    List* list - the linked list
    int id - the id of the Item to find */
 char *get_history(List *list, int id){
 
   Item *curr = list->root;
+
   //traverse entire list to find desired link
   while( curr != NULL ){
     if( curr->id == id ){
@@ -63,9 +65,8 @@ char *get_history(List *list, int id){
 /* Print the entire contents of the list. */
 void print_history(List *list){
 
-  Item *curr = list->root;//get the head of the list
+  Item *curr = list->root;
 
-  //traverse all elements until curr = NULL
   while(curr != NULL){
     printf("Input %d: %s\n", curr->id, curr->str);
     curr = curr->next;
@@ -77,7 +78,7 @@ void print_history(List *list){
 /* Free the history list and the strings it references. */
 void free_history(List *list){
 
-  //Free all the links in the linked list
+  //free all the links in the linked list
   Item *curr = list->root;
   Item *prev;
 
@@ -90,7 +91,7 @@ void free_history(List *list){
     free(prev);//free the link
   }
   
-  //Free the list
+  //free the list
   free(list);
   
 }//free_history()
