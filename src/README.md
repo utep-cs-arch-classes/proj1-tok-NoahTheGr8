@@ -66,7 +66,7 @@ The UI is straight forward and there is a guide shown at the top once the
 program is ran. A demo is shown below -
 
 ```
-=========  GREETINGS USER  =========
+			=========  GREETINGS USER  =========
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 GUIDE TO VALID INPUTS:
 
@@ -82,37 +82,36 @@ GUIDE TO VALID INPUTS:
 IN > !
 OUT>
 	*NOTHING IN HISTORY YET*
-	-----------------------------------------------
-	IN>  HELLO  WORLD
-	OUT>
-		Token 0: HELLO
-		      Token 1: WORLD
-		      	    >>  FREE'D TOKENS <<
-			    -----------------------------------------------
-			    IN> !
-			    OUT>
-				INPUT 0:  HELLO  WORLD
-				-----------------------------------------------
-				IN> h
-				OUT>
-					Token 0: h
-					      >>  FREE'D TOKENS <<
-					      -----------------------------------------------
-					      IN> !1
-					      OUT>
-						INPUT 1: h
-						-----------------------------------------------
-						IN> !
-						OUT>
-							INPUT 0:  HELLO  WORLD
-							      INPUT 1: h
-							      -----------------------------------------------
-							      IN> q
-							      -----------------------------------------------
-								>>  FREE'D
-								HISTORY <<
+-----------------------------------------------
+IN>  HELLO  WORLD
+OUT>
+	Token 0: HELLO
+	Token 1: WORLD
+	>>  FREE'D TOKENS <<
+-----------------------------------------------
+IN> !
+OUT>
+	INPUT 0:  HELLO  WORLD
+-----------------------------------------------
+IN> h
+OUT>
+	Token 0: h
+      >>  FREE'D TOKENS <<
+-----------------------------------------------
+IN> !1
+OUT>
+	INPUT 1: h
+-----------------------------------------------
+IN> !
+OUT>
+	INPUT 0:  HELLO  WORLD
+	INPUT 1: h
+-----------------------------------------------
+IN> q
+-----------------------------------------------
+>>  FREE'D HISTORY <<
 
-=========  FAREWELL USER  =========
+    	   	   =========  FAREWELL USER  =========
 ```
 
 ### Bugs
