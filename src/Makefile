@@ -1,5 +1,5 @@
-main: runner.o tokenizer.o history.o
-	gcc -o output runner.o tokenizer.o history.o 
+main: runner.o
+	cc runner.o -o runner 
 
 runner.o: runner.c
 	gcc -c runner.c
