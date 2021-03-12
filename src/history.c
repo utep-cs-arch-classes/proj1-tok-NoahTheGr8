@@ -82,8 +82,7 @@ void print_history(List *list){
 
   //traverse all elements until curr = NULL
   while(curr != NULL){
-    printf("Input %d: ", curr->id);
-    printf("%s\n", curr->str);
+    printf("Input %d: %s\n", curr->id, curr->str);
     curr = curr->next;
   }//while
   
@@ -92,5 +91,7 @@ void print_history(List *list){
 /* Free the history list and the strings it references. */
 void free_history(List *list){
 
+  //use get_history();
+  printf("size of linkedlist %d", sizeof(list)/sizeof(list->root));
 
 }

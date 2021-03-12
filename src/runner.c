@@ -75,8 +75,10 @@ void main(){
   //char *des_link = (char *)malloc(sizeof(char));
   //the first link in the LL has id = 0
   //[a] [b] [c] | -1=NULL>>, 0=a>>,1=b>>,2=c>>,3=NULL >>
+  /*
   int id = 3;
   char *des_link = get_history(inp_hist, id);
   printf("Link %d string> %s\n", id ,des_link);
-  
+  */
+  free_history(inp_hist);
 }//main
